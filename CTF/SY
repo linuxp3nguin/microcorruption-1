@@ -1,0 +1,3 @@
+Sydney
+The same principle, just the password is hardcoded in the code (using cmp instructions) not stored in memory. When taking the word values from the code, remember that msp430 is little endian, so the bytes in the memory are inverted.
+Password: 5f3b6f2722544d5e
