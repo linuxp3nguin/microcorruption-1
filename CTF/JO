@@ -1,0 +1,3 @@
+Johannesburg
+Checks strcpy() overflow by placing a canary 0xde after 16th character. Word at password[19] is popped to pc after ret from main. So setting this value to the address of unlock_door() solves the challenge.
+Password: 4141414141414141414141414141414141de6645
