@@ -1,0 +1,4 @@
+Santa Cruz
+Password is copied after 16 bytes of the username. Rewrite return address from main, bytes stored after password. There are two 17 bytes buffer for the username and password and between them are constants 8 and 16. The length of the username/password is compared against them. We can supply a username long enough to overwrite the return address and also the two input limits so our data passes the size checks. The return address from main will be popped to PC.
+Username: 41414141414141414141414141414141410141414141414141414141414141414141414141413a463a463a463a463a46
+Password: 4242424242424242424242424242424242
