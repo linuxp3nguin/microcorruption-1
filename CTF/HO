@@ -1,0 +1,46 @@
+Hollywood
+The code is randomized, there are no symbols. We don't know where to place breakpoints, so we have to step by hand. I actually give this one up and came back later on.
+However, only patience is needed to solve this one.
+One of the first observations is that the program duration is almost linearly dependent on the input size. The longer the input, the longer the execution. That's because the program generates a new code for each input byte.
+Let's start debugging. There are many loops which we can skip. Once we realize that an instruction of importance is generated. It loads the address of our input into a register! When we go through the loop again and again, we find an algorithm that performs computation on our input. The generated algorithm is:
+mov #2600 r5
+clr r6
+add @r5, r4
+swpb r4
+xor @r5+, r6
+xor r4, r6
+xor r6, r4
+tst 0x0(r5)
+mov sr, r7
+and #0x2, r7
+rra r7
+xor #0x1, r7
+swpb    r7
+rra r7
+sxt r7
+swpb    r7
+sxt r7
+mov #0x4b18, r8
+and r7 r8
+and #0x47aa, r7
+add r7, r8
+clr r7
+mov r8, r12
+cmp #0xfeb1, r4
+mov sr, r7
+clr r4
+cmp #0x9298, r6
+and sr, r7
+clr r6
+rra r7
+or #0x1, r7
+swpb r7
+rra r7
+rra r7
+rra r7
+rra r7
+bis r7, sr
+mov #0xff00, sr
+call #0x10
+The above code unlocks the lock, when proper conditions are met. We have the algorithm at our hand, so we can write a key generator to get a valid password. Simple hollywood-keygen.c should be around. The shortest valid key is 5 bytes long.
+Password: 4d4db1da96
