@@ -1,0 +1,5 @@
+Bangalore
+DEP. We can overwrite PC as usual, but our data is mapped as not executable. From manual, its possible to mark page as executable, there's even function for that in the code.
+We can easily overwrite the PC, however the memory where our shellcode resides is readonly. And there's no unlock_door to jump to, we need to launch our shellcode. There's a function called mark_page_executable, which makes a memory page executable. This is what we want to misuse. We have to place an address of a memory page with our shellcode at the stack. We control the stack so we point the return address to our now executable code.
+We need the address of our code on the stack, then jump to mark_page_executable and set that page as executable. After ret from mark_page_executable, address of our shellcode is popped to PC.
+Password: 10004400440044004400440044004400ba44400040000640324000ff104d0000
