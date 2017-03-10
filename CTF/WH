@@ -1,0 +1,2 @@
+Whitehorse
+HSM-2 which unlocks the door only if the password matches. Bytes 17,18 of password are popped to pc after return from main. So we put there an address pointing to our password buffer. Password: 414141414141414130127f00b01232458434
