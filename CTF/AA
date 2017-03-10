@@ -1,0 +1,3 @@
+Addis Ababa
+First printf() format vulnerability. We will use %n format string to overwrite data in memory. We can rewrite the byte which is later checked in main to unlock the door.
+Password: 44362578256e
