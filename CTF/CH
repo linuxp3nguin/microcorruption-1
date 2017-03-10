@@ -1,0 +1,9 @@
+Cernobyl
+First impressions: Input accepts up to 0x550 = 1360 characters, meaning the shellcode is expected to be huge. The program uses a hash table, malloc.
+The program accepts commands separated by semicolon:
+new abc 1234 ; access abc 1234
+Adds a user abc with a deactivated account.
+create_hashtable() allocates data from memory address 5000. The memory is allocated at the start. There's a walk function to debug malloc. We can corrupt malloc's data. How to launch free()? It's called from add_to_table() -> rehash(). To reach free() we must to hash more values to one bucket.
+Malloc checks that the next block address isn't smaller than the previous block, otherwise it thinks heap is exhausted.
+Longest indirect jump is +35c, which isn't enough to reach my shellcode. All the addresses seem to be a dead end. The hash is computed from the full username length, however, username is cut down to 15 + NUL byte.
+We need input that'll hash to 0. bucket full length and after rehash() to land in 2. bucket.
