@@ -1,0 +1,3 @@
+Tutorial
+The check_password() function counts the amount of characters. Any password of length 8 is accepted.
+Password: 1122334455667788
