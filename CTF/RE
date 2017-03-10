@@ -1,0 +1,5 @@
+Reykjavik
+No HSM. The device boasts with "military-grade encryption". There are no debugging symbols for the most important code which resides at 0x2400. The code is deciphered by the enc() function which includes code:
+cmp #0xdb95, -0x24(r4)
+Data on -0x24(r4) is the first two bytes of our input. So this single cmp instruction verifies the password.
+Password: 95db
