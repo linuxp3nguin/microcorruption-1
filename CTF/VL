@@ -1,0 +1,4 @@
+Vladivostok
+strcpy() + printf() format string. Password bytes 9 and 10 are popped to PC after ret The code in memory is placed at a random address, so we need an info leak to know where to jump. Because the username is used directly as an argument to printf(), we can use %x format string to leak data from stack, We get address of printf() itself. When we inspect the code in memory, we find that the other functions are placed at the same offset as before the randomization. INT is placed at a static offset from the print address (0x182). So we place 007f on the stack and call INT.
+Username: 25782578
+Password: 7f007f007f007f00----7f007f00 Replace --- by the address leaked by printf() plus 0x182.
