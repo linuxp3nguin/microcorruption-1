@@ -1,0 +1,4 @@
+Algiers
+Heap corruption. The memory for the username and password is allocated on heap. We can overwrite the malloc metadata by passing a large input. unlock_door() function is placed in memory directly after free(). We'll replace a ret at the end of free() by a "nop" instruction to slide directly into unlock_door().
+Username: 63636363636363636363636363636363444462452100
+Password: 41
