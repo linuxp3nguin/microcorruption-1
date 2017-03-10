@@ -1,0 +1,3 @@
+Novosibirsk
+printf() again. Using the %n format string we can write a byte to an arbitrary memory location. We will rewrite the byte which will be used to set sr in conditional_unlock_door before calling INT. This will unlock the door unconditionally. We have to write 0x7f bytes with printf so the %n will write the same number to a integer address on the stack. Overwrite memory at address 44c8 to 7f.
+Password: 1242c8442573256e61616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161
